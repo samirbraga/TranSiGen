@@ -228,7 +228,7 @@ class TranSiGen(torch.nn.Module):
             # Eval
             train_dict, train_metrics_dict, train_metrics_dict_ls= self.test_model(loader=train_loader, loss_item=loss_item, metrics_func=metrics_func)
             train_loss = train_dict['loss']
-            train_mse_x1 = train_dict['mse_x1']
+            train_mse_x1 = train_dict['mse_x1']aaah
             train_mse_x2 = train_dict['mse_x2']
             train_mse_pert = train_dict['mse_pert']
             train_kld_x1 = train_dict['kld_x1']
