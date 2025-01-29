@@ -34,7 +34,7 @@ def load_from_HDF(fname):
         for key in f:
             data[key] = np.asarray(f[key])
             if isinstance(data[key][0], np.bytes_):
-                data[key] = data[key].astype(np.str)
+                data[key] = data[key].astype(str)
     return data
 
 def save_to_HDF(fname, data):
@@ -87,11 +87,10 @@ def getSplitsByGroupKFold(groups, n_splits, shuffle, random_state):
         # randomly rename groups so that the GroupKFold (which sorts by group ids first) splits can be randomized
         unique_groups = np.unique(groups)
         rnd_renames = sklearn.utils.shuffle(np.arange(len(unique_groups)), random_state=random_state)
-        groups_renamed = np.array([rnd_renames[np.argwhere(unique_groups == g)[0]] for g in groups])
+        groups_renamed = np.array([rnd_renames[np.argwhere(unique_groups == g)[0, 0]] for g in groups])
         kfsplit = kf.split(X=np.zeros(groups.shape[0]), groups=groups_renamed)
     else:
         kfsplit = kf.split(X=np.zeros(groups.shape[0]), groups=groups)
-
     folds = [list(x[1]) for x in kfsplit]
     folds_nums = list(range(len(folds)))
 
