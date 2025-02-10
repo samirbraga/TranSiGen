@@ -6,3 +6,4 @@ h5py==3.12.1
 scikit-learn==1.6.1
 scipy==1.15.1
 matplotlib==4.0.1
+bayesian-optimization==2.0.3

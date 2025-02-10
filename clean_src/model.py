@@ -194,7 +194,7 @@ class TranSiGen(torch.nn.Module):
         feat_embed = self.feat_embeddings(features)
         return feat_embed
 
-    def train_model(self, learning_rate, weight_decay, n_epochs, train_loader, test_loader, save_model=True, metrics_func=None):
+    def train_model(self, learning_rate, weight_decay, n_epochs, train_loader, test_loader, save_model=True, metrics_func=None, verbose=True):
         """ Train TranSiGen """
         epoch_hist = defaultdict(list)
         optimizer = optim.Adam(self.parameters(), lr=learning_rate, weight_decay=weight_decay)
@@ -256,9 +256,10 @@ class TranSiGen(torch.nn.Module):
             for k, v in test_metrics_dict.items():
                 epoch_hist['valid_' + k].append(v)
 
-            print('[Epoch %d] | loss: %.3f, mse_x1_rec: %.3f, mse_x2_rec: %.3f, mse_pert: %.3f, kld_x1: %.3f, kld_x2: %.3f, kld_pert: %.3f| '
-                'valid_loss: %.3f, valid_mse_x1_rec: %.3f, valid_mse_x2_rec: %.3f, valid_mse_pert: %.3f, valid_kld_x1: %.3f, valid_kld_x2: %.3f, valid_kld_pert: %.3f|'
-                % (epoch, train_loss, train_mse_x1, train_mse_x2, train_mse_pert, train_kld_x1, train_kld_x2, train_kld_pert,
+            if verbose:
+                print('[Epoch %d] | loss: %.3f, mse_x1_rec: %.3f, mse_x2_rec: %.3f, mse_pert: %.3f, kld_x1: %.3f, kld_x2: %.3f, kld_pert: %.3f| '
+                    'valid_loss: %.3f, valid_mse_x1_rec: %.3f, valid_mse_x2_rec: %.3f, valid_mse_pert: %.3f, valid_kld_x1: %.3f, valid_kld_x2: %.3f, valid_kld_pert: %.3f|'
+                    % (epoch, train_loss, train_mse_x1, train_mse_x2, train_mse_pert, train_kld_x1, train_kld_x2, train_kld_pert,
                    test_loss, test_mse_x1, test_mse_x2, test_mse_pert, test_kld_x1, test_kld_x2, test_kld_pert), flush=True)
 
             if test_loss < best_value:
