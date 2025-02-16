@@ -256,7 +256,7 @@ class TranSiGen(torch.nn.Module):
             for k, v in test_metrics_dict.items():
                 epoch_hist['valid_' + k].append(v)
 
-            if verbose:
+            if verbose and (epoch % 10) == 0:
                 print('[Epoch %d] | loss: %.3f, mse_x1_rec: %.3f, mse_x2_rec: %.3f, mse_pert: %.3f, kld_x1: %.3f, kld_x2: %.3f, kld_pert: %.3f| '
                     'valid_loss: %.3f, valid_mse_x1_rec: %.3f, valid_mse_x2_rec: %.3f, valid_mse_pert: %.3f, valid_kld_x1: %.3f, valid_kld_x2: %.3f, valid_kld_pert: %.3f|'
                     % (epoch, train_loss, train_mse_x1, train_mse_x2, train_mse_pert, train_kld_x1, train_kld_x2, train_kld_pert,
