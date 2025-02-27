@@ -5,5 +5,5 @@ torchvision==0.20.1
 h5py==3.12.1
 scikit-learn==1.6.1
 scipy==1.15.1
-matplotlib==4.0.1
+matplotlib==3.9.4
 bayesian-optimization==2.0.3
